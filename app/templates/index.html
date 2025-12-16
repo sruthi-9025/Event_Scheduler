@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Event Scheduling & Resource Allocation System</h2>
+  <p>Use the navigation bar to manage events, resources, allocations, view conflicts and reports.</p>
+  <p>
+    <a class="btn btn-primary" href="{{ url_for('main.load_sample') }}">Load Sample Data</a>
+  </p>
+</div>
+{% endblock %}

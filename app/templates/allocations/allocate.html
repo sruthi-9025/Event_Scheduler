@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>Allocate Resources</h3>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.event.label }} {{ form.event(class="form-select") }}
+    </div>
+    <div class="mb-3">
+      {{ form.resources.label }} {{ form.resources(class="form-select", multiple=true, size=6) }}
+    </div>
+    <button class="btn btn-primary" type="submit">Allocate</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

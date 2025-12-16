@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>Edit Event</h3>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.title.label }} {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.start_time.label }} {{ form.start_time(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.end_time.label }} {{ form.end_time(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label }} {{ form.description(class="form-control", rows=3) }}
+    </div>
+    <button class="btn btn-primary" type="submit">Update</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.list_events') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

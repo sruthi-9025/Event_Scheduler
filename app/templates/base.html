@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Scheduler</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Styling -->
+  <style>
+      body {
+          background: #f5f7fa;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+          background: #ffffff !important;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+          padding: 0.8rem 1rem;
+      }
+
+      .navbar-brand {
+          font-weight: 700;
+          font-size: 1.4rem;
+          color: #0d6efd !important;
+      }
+
+      .nav-link {
+          font-size: 1rem;
+          margin-right: 10px;
+          font-weight: 500;
+          color: #333 !important;
+      }
+
+      .nav-link:hover {
+          color: #0d6efd !important;
+      }
+
+      /* Card-like container */
+      .main-container {
+          margin-top: 30px;
+          padding: 25px;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+
+      /* Alerts rounded */
+      .alert {
+          border-radius: 10px;
+          font-weight: 500;
+      }
+
+      /* Smooth button style */
+      .btn-custom {
+          border-radius: 10px;
+          padding: 8px 18px;
+          font-weight: 600;
+      }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('main.index') }}">EventScheduler</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.list_events') }}">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.list_resources') }}">Resources</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.allocate') }}">Allocate</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.conflicts') }}">Conflicts</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.report') }}">Report</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main container -->
+<div class="container main-container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="mb-3">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

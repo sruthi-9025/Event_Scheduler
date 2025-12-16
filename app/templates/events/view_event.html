@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>{{ event.title }}</h3>
+  <p><strong>Start:</strong> {{ event.start_time }} &nbsp; <strong>End:</strong> {{ event.end_time }}</p>
+  <p>{{ event.description }}</p>
+  <h5>Allocated Resources</h5>
+  <ul>
+    {% for a in event.allocations %}
+      <li>{{ a.resource.resource_name }} ({{ a.resource.resource_type }})</li>
+    {% else %}
+      <li>No resources allocated.</li>
+    {% endfor %}
+  </ul>
+  <a class="btn btn-secondary" href="{{ url_for('main.list_events') }}">Back</a>
+</div>
+{% endblock %}

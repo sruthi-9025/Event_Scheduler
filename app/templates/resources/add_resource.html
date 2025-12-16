@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>{% if resource %}Edit Resource{% else %}Add Resource{% endif %}</h3>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.resource_name.label }} {{ form.resource_name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.resource_type.label }} {{ form.resource_type(class="form-select") }}
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.list_resources') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

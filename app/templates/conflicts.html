@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>Conflicts</h3>
+  {% if conflicts %}
+    <table class="table">
+      <thead><tr><th>Resource</th><th>Event A</th><th>Event B</th></tr></thead>
+      <tbody>
+        {% for c in conflicts %}
+          <tr>
+            <td>{{ c.resource.resource_name }} ({{ c.resource.resource_type }})</td>
+            <td>{{ c.event_a.title }}<br>{{ c.event_a.start_time }} - {{ c.event_a.end_time }}</td>
+            <td>{{ c.event_b.title }}<br>{{ c.event_b.start_time }} - {{ c.event_b.end_time }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-success">No conflicts detected.</div>
+  {% endif %}
+</div>
+{% endblock %}

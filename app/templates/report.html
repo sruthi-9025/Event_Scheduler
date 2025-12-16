@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>Resource Utilisation Report</h3>
+  <form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+      <label>Start (ISO):</label>
+      <input class="form-control" type="datetime-local" name="start" value="{{ start or '' }}">
+    </div>
+    <div class="col-auto">
+      <label>End (ISO):</label>
+      <input class="form-control" type="datetime-local" name="end" value="{{ end or '' }}">
+    </div>
+    <div class="col-auto" style="padding-top: 1.7rem;">
+      <button class="btn btn-primary" type="submit">Run</button>
+    </div>
+  </form>
+  {% if results %}
+    <table class="table table-striped">
+      <thead><tr><th>Resource</th><th>Total Hours (in range)</th><th>Upcoming Bookings</th></tr></thead>
+      <tbody>
+        {% for r in results %}
+          <tr>
+            <td>{{ r.resource.resource_name }} ({{ r.resource.resource_type }})</td>
+            <td>{{ r.total_hours }}</td>
+            <td>
+              {% for u in r.upcoming %}
+                <div>{{ u.title }} ({{ u.start_time }} - {{ u.end_time }})</div>
+              {% else %}
+                <div>No upcoming bookings</div>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

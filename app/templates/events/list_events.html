@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-4">
+  <h3>Events <a class="btn btn-sm btn-primary" href="{{ url_for('main.add_event') }}">Add Event</a></h3>
+  <table class="table table-striped">
+    <thead><tr><th>Title</th><th>Start</th><th>End</th><th>Resources</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for e in events %}
+      <tr>
+        <td>{{ e.title }}</td>
+        <td>{{ e.start_time }}</td>
+        <td>{{ e.end_time }}</td>
+        <td>
+          {% for a in e.allocations %}
+            <span class="badge bg-secondary">{{ a.resource.resource_name }}</span>
+          {% endfor %}
+        </td>
+        <td>
+          <a class="btn btn-sm btn-info" href="{{ url_for('main.view_event', event_id=e.event_id) }}">View</a>
+          <a class="btn btn-sm btn-warning" href="{{ url_for('main.edit_event', event_id=e.event_id) }}">Edit</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
